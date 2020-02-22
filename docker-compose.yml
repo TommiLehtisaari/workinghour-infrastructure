@@ -1,0 +1,20 @@
+version: '2.4'
+
+services:
+  mongodb:
+    image: mongo:4.2.3-bionic
+    volumes:
+      - ~/data/db:/data/db
+  graphql-api:
+    image: tommilehtisaari/workinghour-api:v0.1
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017
+      JWT_SECRET: ${JWT_SECRET}
+    ports:
+      - 4000:4000
+  front-end:
+    image: tommilehtisaari/workinghour-frontend:v0.1
+    ports:
+      - 3000:3000
+    links:
+      - graphql-api
