@@ -20,3 +20,7 @@ The application can be viewed now on `localhost:3000`and Graphql API can be foun
 ```bash
 docker-compose down
 ```
+
+### About Front End
+
+The Front End Docker Image has currently hardcoded API Endpoint for `localhost:4000`. This is because of React. The Front End Docker Image uses optimized production build which gets hardcoded value from `.env.production`file. If the API Endpoint has to be switched the Front End can be build again from the [frontend-repo](https://github.com/TommiLehtisaari/workinghour-frontend). Image from `docker-compose.yml` hasto be also changed accordingly.
