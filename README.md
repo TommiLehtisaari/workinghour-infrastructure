@@ -32,3 +32,44 @@ docker-compose down
 ### About Front End
 
 The Front End Docker Image has currently hardcoded API Endpoint for `localhost:4000`. This is because of React. The Front End Docker Image uses optimized production build which gets hardcoded value from `.env.production`file. If the API Endpoint has to be switched the Front End can be build again from the [frontend-repo](https://github.com/TommiLehtisaari/workinghour-frontend). Image from `docker-compose.yml` hasto be also changed accordingly.
+
+### Docker volumes
+
+This will crate named volume for presistent data:
+`workinghours-infrastructure_mongo-db` and `workinghours-infrastructure_mongo-config`
+
+This can be queried with:
+
+```bash
+$ docker volume ls
+DRIVER              VOLUME NAME
+local               workinghours-infrastructure_mongo-config
+local               workinghours-infrastructure_mongo-db
+```
+And deleted:
+
+```bash
+$ docker volume rm \
+workinghours-infrastructure_mongo-config \
+workinghours-infrastructure_mongo-db
+```
+
+## Admin privileges
+
+This project is created so that other admins can promote users to admins as well. All the admins are on same rank so that once an admin can not be depromoted. First admin can be done with naming the first user as `username=superuser`.
+
+go to: `localhost:4000/graphql` and inset the query:
+
+```graphql
+mutation {
+	createUser(
+		username: "superuser"
+		name: "Adminstrator"
+		password: "<password>"
+	){
+		value
+	}
+}
+```
+
+Other options are manipulating directly the database.
