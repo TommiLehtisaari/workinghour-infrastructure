@@ -6,6 +6,14 @@ At the moment this does not do GitOps kind of delivery nor does it use kubernete
 
 For now this can be used as developper tool to view and test the Working Hour app itself. This can be done with a help of `docker-compose`.
 
+### Set environmentvariables
+
+An Environment variable has to be set for bcrypt for password hashing:
+
+```bash
+export JWT_SECRET=<secret-string>
+```
+
 #### Deploy the app with compose on this repo:
 
 ```bash
